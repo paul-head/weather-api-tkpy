@@ -3,3 +3,4 @@ uvicorn==0.13.3
 httpx==0.16.1
 jinja2==2.11.3
 aiofiles==0.6.0
+requests==2.25.1
