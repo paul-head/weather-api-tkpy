@@ -1,0 +1,16 @@
+[Unit]
+Description=gunicorn uvicorn service for Weather Service API
+After=syslog.target
+
+[Service]
+ExecStart=/app/venv/bin/gunicorn -b 127.0.0.1:8081 -w 2 -k uvicorn.workers.UvicornWorker main:api --name weather_svc --chdir /apps/weather-api-tkpy --access-logfile /apps/logs/weather_api/access.log --error-logfile /apps/logs/weather_api/errors.log --user apiuser
+
+RuntimeDirectory=/apps/weather-api-tkpy
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
